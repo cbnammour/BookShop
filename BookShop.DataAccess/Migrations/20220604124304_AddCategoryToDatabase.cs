@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace BookShopWeb.Migrations
+namespace BookShop.DataAccess
 {
     public partial class AddCategoryToDatabase : Migration
     {
