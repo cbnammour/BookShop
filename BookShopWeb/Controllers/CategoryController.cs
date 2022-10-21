@@ -51,14 +51,15 @@ namespace BookShopWeb.Controllers
             {
                 return NotFound();
             }
-            Category catergoryFromDb = _db.Categories.Find(id);
+            // Category catergoryFromDb = _db.Categories.Find(id);
+            var categoryFromDbFirst = _db.Categories.FirstOrDefault(c => c.Id == id);
 
-            if (catergoryFromDb == null)
+            if (categoryFromDbFirst == null)
             {
                 return NotFound();
             }
 
-            return View(catergoryFromDb);
+            return View(categoryFromDbFirst);
         }
 
         //POST
