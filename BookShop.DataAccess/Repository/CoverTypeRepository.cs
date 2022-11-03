@@ -3,17 +3,17 @@ using BookShop.Models;
 
 namespace BookShop.DataAccess.Repository
 {
-    public class CategoryRepository : Repository<Category>, ICategoryRepository
+    public class CoverTypeRepository : Repository<CoverType>, ICoverTypeRepository
     {
         private ApplicationDbContext _db;
 
-        public CategoryRepository(ApplicationDbContext db) : base(db)
+        public CoverTypeRepository(ApplicationDbContext db) : base(db)
         {
             _db = db;
         }
-        public void Update(Category category)
+        public void Update(CoverType obj)
         {
-            _db.Update(category);
+            _db.Update(obj);
         }
     }
 }

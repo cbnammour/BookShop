@@ -1,5 +1,4 @@
 ﻿using BookShop.Models;
-using BookShop.DataAccess;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookShop.DataAccess
@@ -12,6 +11,8 @@ namespace BookShop.DataAccess
         }
 
         public DbSet<Category> Categories { get; set; }
+        public DbSet<CoverType> CoverTypes { get; set; }
+        public DbSet<Product> Products { get; set; }
 
     }
 }
