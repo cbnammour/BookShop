@@ -27,7 +27,7 @@ namespace BookShop.DataAccess.Repository
             {
                 foreach(var property in includeProperties.Split(new char[] {','}, StringSplitOptions.RemoveEmptyEntries))
                 {
-                    query = query.Include(includeProperties);
+                    query = query.Include(property);
                 }
             }
             return query.ToList();
