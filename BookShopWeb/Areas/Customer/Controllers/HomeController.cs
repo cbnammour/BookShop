@@ -1,5 +1,6 @@
 ﻿using BookShop.DataAccess.Repository.IRepository;
 using BookShop.Models;
+using BookShop.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -20,6 +21,16 @@ namespace BookShopWeb.Controllers
         {
             IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties:"Category,CoverType");
             return View(productList);
+        }
+
+        public IActionResult Details(int id)
+        {
+            ShoppingCart cartObj = new()
+            {
+                Product = _unitOfWork.Product.GetFirsrOrDefault(u => u.Id == id, includeProperties: "Category,CoverType"),
+                Count = 1
+            };
+            return View(cartObj);
         }
 
         public IActionResult Privacy()
