@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookShopWeb.Controllers
 {
+    [Area("Admin")]
     public class ProductController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -63,13 +64,13 @@ namespace BookShopWeb.Controllers
             if (ModelState.IsValid)
             {
                 string wwwRootPath = _hostEnvironment.WebRootPath;
-                if(file!=null)
+                if (file != null)
                 {
                     string fileName = Guid.NewGuid().ToString();
                     var uploads = Path.Combine(wwwRootPath, @"images\products");
                     var extenstion = Path.GetExtension(file.FileName);
 
-                    if(obj.Product.ImageURL != null)
+                    if (obj.Product.ImageURL != null)
                     {
                         var oldImage = Path.Combine(wwwRootPath, obj.Product.ImageURL.TrimStart('\\'));
                         if (System.IO.File.Exists(oldImage))
@@ -84,14 +85,15 @@ namespace BookShopWeb.Controllers
                     }
                     obj.Product.ImageURL = @"\images\products\" + fileName + extenstion;
                 }
-                if(obj.Product.Id == 0)
+                if (obj.Product.Id == 0)
                 {
                     _unitOfWork.Product.Add(obj.Product);
-                } else
+                }
+                else
                 {
                     _unitOfWork.Product.Update(obj.Product);
                 }
-                
+
                 _unitOfWork.Save();
                 TempData["success"] = "Product Created Successfully";
                 return RedirectToAction("Index");
@@ -106,8 +108,8 @@ namespace BookShopWeb.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            var ProductList = _unitOfWork.Product.GetAll(includeProperties:"Category");
-            return Json(new {data = ProductList});
+            var ProductList = _unitOfWork.Product.GetAll(includeProperties: "Category");
+            return Json(new { data = ProductList });
         }
 
         //POST
@@ -119,7 +121,7 @@ namespace BookShopWeb.Controllers
             var obj = _unitOfWork.Product.GetFirsrOrDefault(u => u.Id == id);
             if (obj == null)
             {
-                return Json(new {success = false, message = "Error while deleting"});
+                return Json(new { success = false, message = "Error while deleting" });
             }
 
             var oldImage = Path.Combine(_hostEnvironment.WebRootPath, obj.ImageURL.TrimStart('\\'));

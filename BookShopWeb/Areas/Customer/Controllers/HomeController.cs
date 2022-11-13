@@ -1,11 +1,11 @@
 ﻿using BookShop.DataAccess.Repository.IRepository;
 using BookShop.Models;
-using BookShop.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
 namespace BookShopWeb.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -14,12 +14,12 @@ namespace BookShopWeb.Controllers
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
-            
+
         }
 
         public IActionResult Index()
         {
-            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties:"Category,CoverType");
+            IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category,CoverType");
             return View(productList);
         }
 
