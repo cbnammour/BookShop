@@ -45,5 +45,8 @@ namespace BookShop.Models
         [ValidateNever]
         public CoverType CoverType { get; set; }
 
+        [NotMapped]
+        public string? Review { get; set; }
+
     }
 }
